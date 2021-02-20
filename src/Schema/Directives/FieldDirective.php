@@ -47,17 +47,17 @@ GRAPHQL;
 
         return $fieldValue->setResolver(
             function ($root, array $args, GraphQLContext $context, ResolveInfo $resolveInfo) use ($resolver, $additionalData) {
-                $mergedArgs = array_merge($args, ['directive' => $additionalData]);
+                $args = array_merge($args, ['directive' => $additionalData]);
                 
                 // merge args to request allow Controller can handle graphql
                 request()->merge([
-                    'args' => $mergedArg, 
+                    'args' => $args, 
                     'root' => $root
                 ]);
 
                 return $resolver(
                     $root,
-                    $mergedArg,
+                    $args,
                     $context,
                     $resolveInfo
                 );
