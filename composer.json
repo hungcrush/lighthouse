@@ -1,5 +1,5 @@
 {
-    "name": "hungcrush/lighthouse",
+    "name": "hanbiro/lighthouse",
     "type": "library",
     "description": "A framework for serving GraphQL from Laravel",
     "keywords": [
