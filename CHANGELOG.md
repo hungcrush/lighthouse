@@ -11,17 +11,39 @@ You can find and compare releases at the [GitHub release page](https://github.co
 
 ### Added
 
+- Add `GraphQLContext` to `StartExecution` event
+- Add `connect` and `disconnect` operations in nested mutations for HasMany and MorphMany relations https://github.com/nuwave/lighthouse/pull/1730
+
+### Changed
+
+- Optimize `@defer` by avoiding parsing the request multiple times
+- Move HTTP and Schema handling out of the GraphQL class https://github.com/nuwave/lighthouse/pull/1748
+
+### Fixed
+
+- Apply error handling and debug settings consistently https://github.com/nuwave/lighthouse/pull/1749
+
+## 5.3.0
+
+### Added
+
 - Validate that `@with` and `@withCount` are not used on root fields https://github.com/nuwave/lighthouse/pull/1714
 - Add events to cover the lifecycle of a GraphQL request: `EndExecution`, `EndRequest` https://github.com/nuwave/lighthouse/pull/1726
 - Include the client given query, variables and operation name in the `StartExecution` event https://github.com/nuwave/lighthouse/pull/1726
+- Apply `log` option from the `broadcasting` config to the Pusher subscription driver https://github.com/nuwave/lighthouse/pull/1733
+- Support `pusher/pusher-php-server` version 5 https://github.com/nuwave/lighthouse/pull/1741
 
 ### Changed
 
 - Prepend directives when transferring them from types to fields https://github.com/nuwave/lighthouse/pull/1734
+- For `echo` driver-based subscriptions, the event name will be `lighthouse-subscription` https://github.com/nuwave/lighthouse/pull/1733
+- Echo driver will always broadcast through the `private` channel https://github.com/nuwave/lighthouse/pull/1733
 
 ### Fixed
 
 - Apply custom error handlers for syntax or request errors https://github.com/nuwave/lighthouse/pull/1726
+- Define scalars instead of `Mixed` type in directive definitions https://github.com/nuwave/lighthouse/pull/1742
+- Fix subscription extension version default value https://github.com/nuwave/lighthouse/pull/1744
 
 ## 5.2.0
 

@@ -2,12 +2,14 @@
 
 namespace Nuwave\Lighthouse\Subscriptions;
 
+use Illuminate\Contracts\Debug\ExceptionHandler as LaravelExceptionHandler;
 use Illuminate\Support\Arr;
 use Nuwave\Lighthouse\Subscriptions\Broadcasters\EchoBroadcaster;
 use Nuwave\Lighthouse\Subscriptions\Broadcasters\LogBroadcaster;
 use Nuwave\Lighthouse\Subscriptions\Broadcasters\PusherBroadcaster;
 use Nuwave\Lighthouse\Subscriptions\Contracts\Broadcaster;
 use Nuwave\Lighthouse\Support\DriverManager;
+use Psr\Log\LoggerInterface;
 use Pusher\Pusher;
 use RuntimeException;
 
@@ -54,7 +56,11 @@ class BroadcastManager extends DriverManager
 
         $pusher = new Pusher($appKey, $appSecret, $appId, $options);
 
-        return new PusherBroadcaster($pusher);
+        if ($driverConfig['log'] ?? false) {
+            $pusher->setLogger($this->app->make(LoggerInterface::class));
+        }
+
+        return new PusherBroadcaster($pusher, $this->app->make(LaravelExceptionHandler::class));
     }
 
     /**
